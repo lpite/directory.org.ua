@@ -8,7 +8,7 @@ x-base: &base
     context: .
     dockerfile: docker/backend.dockerfile
   environment:
-    - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+    - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
   volumes:
     - .:/code
   depends_on:

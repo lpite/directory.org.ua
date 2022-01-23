@@ -3,8 +3,8 @@ from dataclasses import dataclass
 from fastapi import Query
 from pydantic import BaseModel
 
-from territories import docs
-from territories.enums import KATOTTGCategory, KOATUUCategory
+from directory.territories import docs
+from directory.territories.enums import KATOTTGCategory, KOATUUCategory
 
 
 @dataclass

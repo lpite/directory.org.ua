@@ -3,8 +3,8 @@ from __future__ import annotations
 from sqlalchemy import Column, Integer, String, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 
-from lib.db import Base
-from territories.enums import KATOTTGCategory, KOATUUCategory
+from directory.lib.db import Base
+from directory.territories.enums import KATOTTGCategory, KOATUUCategory
 
 
 class KATOTTG(Base):

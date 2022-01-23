@@ -3,10 +3,10 @@ from http import HTTPStatus
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from lib.db import db_dependency
-from lib.router import APIRouter
-from territories import db
-from territories.schemas import (
+from directory.lib.db import db_dependency
+from directory.lib.router import APIRouter
+from directory.territories import db
+from directory.territories.schemas import (
     GetKATOTTGListResponse,
     KATOTTG,
     GetKATOTTGListParams,

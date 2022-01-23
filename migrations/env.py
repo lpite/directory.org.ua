@@ -1,13 +1,10 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from lib.settings import settings
+from directory.lib.settings import SETTINGS
 
 config = context.config
 
@@ -17,9 +14,7 @@ fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 
-from territories import models
-
-from lib.db import Base, engine
+from directory.lib.db import Base, engine
 
 target_metadata = Base.metadata
 
@@ -37,7 +32,7 @@ def run_migrations_offline():
 
     """
     context.configure(
-        url=settings.DATABASE_URL,
+        url=SETTINGS.DATABASE_URL,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},

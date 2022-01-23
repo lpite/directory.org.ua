@@ -2,7 +2,7 @@ from __future__ import annotations
 import enum
 from functools import lru_cache
 
-from lib.constants import (
+from directory.lib.constants import (
     CATEGORY_LATIN_NORMALIZATION_MAP,
     CATEGORY_CYRILLIC_NORMALIZATION_MAP,
 )

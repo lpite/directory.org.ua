@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 import sqlalchemy as sa
-from territories.enums import KATOTTGCategory, KOATUUCategory
-from territories.models import KATOTTG, KOATUU
+from directory.territories.enums import KATOTTGCategory, KOATUUCategory
+from directory.territories.models import KATOTTG, KOATUU
 
 
 def truncate_katottg(session: Session) -> None:

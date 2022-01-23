@@ -1,12 +1,10 @@
 import re
 from itertools import islice
-from typing import TypeVar
 
 import openpyxl
 
-import lib
 import territories
-from lib.utils import chunks
+from directory.lib import chunks
 from territories.enums import KATOTTGCategory, KOATUUCategory
 from territories.models import KATOTTG, KOATUU
 
@@ -73,18 +71,18 @@ def load_katottg(filename: str) -> None:
         _territories.append(territory)
         print(territory)
 
-    with lib.db.get_session() as session:
+    with territories.lib.db.get_session() as session:
         with session.begin():
 
             session.execute("TRUNCATE katottg;")
-            territories.db.truncate_katottg(session)
+            directory.territories.db.truncate_katottg(session)
 
             print("KATOTTG bulk insert ...")
             for chunk in chunks(items=_territories, n=5000):
-                territories.db.insert_katottg(session, items=chunk)
+                directory.territories.db.insert_katottg(session, items=chunk)
 
             print("Update KATOTTG child count...")
-            territories.db.update_katottg_children_count(session)
+            directory.territories.db.update_katottg_children_count(session)
 
             print("Successfully load KATOTTG data")
 
@@ -120,14 +118,14 @@ def load_koatuu(filename: str) -> None:
         _territories.append(territory)
         print(territory)
 
-    with lib.db.get_session() as session:
+    with territories.lib.db.get_session() as session:
         with session.begin():
 
             print("Truncate KOATUU table...")
-            territories.db.truncate_koatuu(session)
+            directory.territories.db.truncate_koatuu(session)
 
             print("Bulk insert KOATUU...")
             for chunk in chunks(items=_territories, n=5000):
-                territories.db.insert_koatuu(session, items=chunk)
+                directory.territories.db.insert_koatuu(session, items=chunk)
 
             print("Successfully load KOATUU data")

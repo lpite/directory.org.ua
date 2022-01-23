@@ -3,8 +3,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
 
-from lib.db import db_dependency
-from territories import db
+from directory.lib.db import db_dependency
+from directory.territories import db
 
 router = APIRouter(include_in_schema=False)
 

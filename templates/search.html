@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Пошук — Довідник КАТОТТГ{% endblock %}
+{% block meta %}
+    <meta name="description" content="Пошук по довіднику КАТОТТГ — кодифікатору адміністративно-територіальних одиниць та територій територіальних громад">
+{% endblock %}
+
+{% block content %}
+  <h2 class="fw-bold">Результати пошуку</h2>
+  <div class="list-group mt-4">
+    {% if territories %}
+      {% for territory in territories %}
+        <a class="list-group-item" href="{{ url_for('territory', code=territory.code) }}">
+          <span>{{ territory.name }}</span>
+          <span class="text-muted">/ {{ territory.category.display_name }}</span>
+          <span class="text-muted">/ {{ territory.parent.name }}</span>
+        </a>
+      {% endfor %}
+    {% elif not query %}
+      Введіть пошуковий запит у рядок вище
+    {% else %}
+      Нічого не знайдено за вашим запитом...
+    {% endif %}
+  </div>
+
+{% endblock %}

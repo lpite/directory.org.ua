@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}КАТОТТГ {{ territory.name }} — Довідник КАТОТТГ{% endblock %}
+{% block meta %}
+    <meta name="description" content="Код території {{ territory.name }} у довіднику кодів КАТОТТГ — кодифікатору адміністративно-територіальних одиниць та територій територіальних громад">
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for("static", path="details.css") }}">
+{% endblock %}
+
+{% block content %}
+  <a class="fs-5 d-flex text-decoration-none"
+     href="{% if parent %}{{ url_for("territory", code=parent.code) }}{% else %}{{ url_for("territories") }}{% endif %}">
+    <i class="bi bi-arrow-left d-flex align-items-center back-icon"></i>
+    <span class="ms-2">{% if parent %}{{ parent.name }}{% else %}Україна{% endif %}</span>
+  </a>
+  <h2 class="mt-4 fw-bold">{{ territory.name }}</h2>
+  <dl class="definition mt-3">
+    <dt>Назва:</dt>
+    <dd>{{ territory.name }}</dd>
+    <dt>Тип:</dt>
+    <dd>{{ territory.get_category_display }}</dd>
+    <dt>Код:</dt>
+    <dd>{{ territory.code }}</dd>
+    <dt>Код типу:</dt>
+    <dd>{{ territory.category.display_name }}</dd>
+    <dt>Ріень:</dt>
+    <dd>{{ territory.level }}</dd>
+  </dl>
+  {% if children %}
+    <h5 class="mt-5">Територальні одиниці:</h5>
+    <div>
+      <div class="list-group list-group-root well">
+        {% for child in children %}
+          <a class="list-group-item" href="{{ url_for("territory", code=child.code) }}">{{ child.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+{% endblock %}

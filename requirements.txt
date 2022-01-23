@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+typer
+openpyxl
+SQLAlchemy
+psycopg2-binary
+pydantic
+alembic
+black
+Jinja2

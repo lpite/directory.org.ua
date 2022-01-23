@@ -1,0 +1,8 @@
+.definition {
+    display: grid;
+    grid-template: auto / 150px 1fr;
+}
+
+.back-icon {
+    width: 27px;
+}

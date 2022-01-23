@@ -1,0 +1,1 @@
+from territories.schemas import GetKATOTTGListResponse

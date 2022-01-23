@@ -1,6 +1,6 @@
 import typer
 
-from commands import common
+from directory.commands import common
 
 app = typer.Typer()
 

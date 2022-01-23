@@ -32,7 +32,7 @@ services:
 
   commands:
     <<: *base
-    entrypoint: python -m commands
+    entrypoint: python -m directory.commands
 
   alembic:
     <<: *base

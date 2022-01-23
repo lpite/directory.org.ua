@@ -3,10 +3,11 @@ from itertools import islice
 
 import openpyxl
 
-import territories
-from directory.lib import chunks
-from territories.enums import KATOTTGCategory, KOATUUCategory
-from territories.models import KATOTTG, KOATUU
+from directory import territories
+from directory.lib import db
+from directory.lib.utils import chunks
+from directory.territories.enums import KATOTTGCategory, KOATUUCategory
+from directory.territories.models import KATOTTG, KOATUU
 
 
 _katottg_regexp = re.compile(r"^UA\d{17}$")
@@ -71,18 +72,18 @@ def load_katottg(filename: str) -> None:
         _territories.append(territory)
         print(territory)
 
-    with territories.lib.db.get_session() as session:
+    with db.get_session() as session:
         with session.begin():
 
             session.execute("TRUNCATE katottg;")
-            directory.territories.db.truncate_katottg(session)
+            territories.db.truncate_katottg(session)
 
             print("KATOTTG bulk insert ...")
             for chunk in chunks(items=_territories, n=5000):
-                directory.territories.db.insert_katottg(session, items=chunk)
+                territories.db.insert_katottg(session, items=chunk)
 
             print("Update KATOTTG child count...")
-            directory.territories.db.update_katottg_children_count(session)
+            territories.db.update_katottg_children_count(session)
 
             print("Successfully load KATOTTG data")
 
@@ -118,14 +119,14 @@ def load_koatuu(filename: str) -> None:
         _territories.append(territory)
         print(territory)
 
-    with territories.lib.db.get_session() as session:
+    with db.get_session() as session:
         with session.begin():
 
             print("Truncate KOATUU table...")
-            directory.territories.db.truncate_koatuu(session)
+            territories.db.truncate_koatuu(session)
 
             print("Bulk insert KOATUU...")
             for chunk in chunks(items=_territories, n=5000):
-                directory.territories.db.insert_koatuu(session, items=chunk)
+                territories.db.insert_koatuu(session, items=chunk)
 
             print("Successfully load KOATUU data")

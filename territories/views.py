@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Request, Query, Response
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
 
 from lib.db import db_dependency
@@ -46,3 +47,8 @@ def details(request: Request, code: str, session: Session = Depends(db_dependenc
     }
 
     return templates.TemplateResponse("details.html", context)
+
+
+@router.get('/ads.txt', response_class=PlainTextResponse)
+def ads():
+    return 'google.com, pub-4422566096376436, DIRECT, f08c47fec0942fa0'

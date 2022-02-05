@@ -35,6 +35,7 @@ class ListResponseBase(BaseModel):
 class KATOTTG(BaseModel):
     code: str
     name: str
+    name_en: str
     level: int
     parent_id: str | None
     category: KATOTTGCategory
@@ -48,6 +49,7 @@ class KOATUU(BaseModel):
     code: str
     category: KOATUUCategory | None
     name: str
+    name_en: str
     katottg_code: str | None
     katottg_name: str | None
     katottg_category: KATOTTGCategory | None

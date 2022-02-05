@@ -12,6 +12,7 @@ class KATOTTG(Base):
 
     code = Column(String, primary_key=True, index=True)
     name = Column(String, index=True, nullable=False)
+    name_en = Column(String, nullable=True)
     level = Column(Integer, index=True, nullable=False)
     parent_id = Column(String, ForeignKey(code), index=True, nullable=True)
     category = Column(Enum(KATOTTGCategory), index=True, nullable=False)
@@ -29,6 +30,7 @@ class KOATUU(Base):
     code = Column(String, primary_key=True, index=True)
     category = Column(Enum(KOATUUCategory), index=True, nullable=True)
     name = Column(String, index=True, nullable=False)
+    name_en = Column(String, nullable=True)
     katottg_code = Column(String, index=True, nullable=True)
     katottg_name = Column(String, index=True, nullable=True)
     katottg_category = Column(Enum(KATOTTGCategory), index=True, nullable=True)

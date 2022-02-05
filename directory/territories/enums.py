@@ -22,6 +22,7 @@ class KATOTTGCategory(enum.Enum):
      - X - Селище
      - B - Район в місті
     """
+
     region = "O"
     special = "K"
     district = "P"

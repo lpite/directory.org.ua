@@ -42,4 +42,4 @@ services:
   black:
     <<: *base
     entrypoint: black
-    command: lib territories migrations commands
+    command: directory

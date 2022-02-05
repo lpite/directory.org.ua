@@ -19,6 +19,7 @@ def get_session() -> Session:
     with SessionLocal() as session:
         yield session
 
+
 def db_dependency() -> Session:
     with get_session() as session:
         yield session

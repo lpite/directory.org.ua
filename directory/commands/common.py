@@ -8,11 +8,16 @@ from directory.lib import db
 from directory.lib.utils import chunks
 from directory.territories.enums import KATOTTGCategory, KOATUUCategory
 from directory.territories.models import KATOTTG, KOATUU
+from translitua import translit, UkrainianKMU
 
 
 _katottg_regexp = re.compile(r"^UA\d{17}$")
 _koatuu_regexp = re.compile(r"^\d{10}$")
 _name_regexp = re.compile(r"^[А-ЩЬЮЯҐЄІЇа-щьюяґєії\- ’/.,]+$")
+
+
+def translit_name(name: str) -> str:
+    return translit(src=name, table=UkrainianKMU)
 
 
 def normalize_name(name: str) -> str:
@@ -65,6 +70,7 @@ def load_katottg(filename: str) -> None:
         territory = KATOTTG(
             code=code,
             name=name,
+            name_en=translit_name(name),
             parent_id=parent,
             level=len(levels),
             category=category,
@@ -109,6 +115,7 @@ def load_koatuu(filename: str) -> None:
         territory = KOATUU(
             code=code,
             name=name,
+            name_en=translit_name(name),
             category=_category,
         )
         if katottg_name is not None:

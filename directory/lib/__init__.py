@@ -1,3 +1,3 @@
 from directory.lib import db
 
-__all__ = ['db']
+__all__ = ["db"]

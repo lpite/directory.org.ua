@@ -11,7 +11,10 @@ from directory.territories.enums import KATOTTGCategory, KOATUUCategory
 class ListParametersBase:
     page: int = Query(default=1, gte=1, description="Номер сторінки")
     page_size: int = Query(
-        default=20, gt=1, lte=100, description="Кількість елементів на сторінціі"
+        default=20,
+        gt=1,
+        lte=100,
+        description="Кількість елементів на сторінці",
     )
 
     @property

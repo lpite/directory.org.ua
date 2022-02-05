@@ -25,7 +25,6 @@ def search(
     session: Session = Depends(db_dependency),
 ) -> Response:
     territories = db.get_katottg_search(session, query=query)
-    context = {"territories": territories}
     context = {"request": request, "territories": territories, "query": query}
     return templates.TemplateResponse("search.html", context)
 
@@ -49,6 +48,6 @@ def details(request: Request, code: str, session: Session = Depends(db_dependenc
     return templates.TemplateResponse("details.html", context)
 
 
-@router.get('/ads.txt', response_class=PlainTextResponse)
+@router.get("/ads.txt", response_class=PlainTextResponse)
 def ads():
-    return 'google.com, pub-4422566096376436, DIRECT, f08c47fec0942fa0'
+    return "google.com, pub-4422566096376436, DIRECT, f08c47fec0942fa0"

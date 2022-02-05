@@ -19,12 +19,14 @@
   <dl class="definition mt-3">
     <dt>Назва:</dt>
     <dd>{{ territory.name }}</dd>
+    <dt>Назва (EN):</dt>
+    <dd>{{ territory.name_en }}</dd>
     <dt>Тип:</dt>
-    <dd>{{ territory.get_category_display }}</dd>
+    <dd>{{ territory.category.display_name }}</dd>
     <dt>Код:</dt>
     <dd>{{ territory.code }}</dd>
     <dt>Код типу:</dt>
-    <dd>{{ territory.category.display_name }}</dd>
+    <dd>{{ territory.category.value }}</dd>
     <dt>Ріень:</dt>
     <dd>{{ territory.level }}</dd>
   </dl>

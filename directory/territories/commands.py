@@ -163,6 +163,6 @@ def load_katottg(filename: str = KATOTTG_FILENAME_DEFAULT):
     _load_katottg(filename=filename)
 
 
-@_load_app.command(name="katottg")
+@_load_app.command(name="koatuu")
 def load_koatuu(filename: str = KOATUU_FILENAME_DEFAULT):
     _load_koatuu(filename=filename)

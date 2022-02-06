@@ -5,10 +5,10 @@
 # Migrations
 Autogenerate migration
 ```shell
-docker compose run alembic revision --autogenerate -m "Init tables"
+docker compose run --rm alembic revision --autogenerate -m "Init tables"
 ```
 
 # Load data
 ```shell
-docker compose run commands load-data
+docker compose run --rm commands territories load all
 ```

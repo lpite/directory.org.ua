@@ -15,6 +15,8 @@ fileConfig(config.config_file_name)
 # add your model's MetaData object here
 
 from directory.lib.db import Base, engine
+from directory.territories import models
+from directory.tokens import models
 
 target_metadata = Base.metadata
 

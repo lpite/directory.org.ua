@@ -1,7 +1,6 @@
 import logging
-from http import HTTPStatus
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from fastapi.security import APIKeyHeader
 from sqlalchemy.orm import Session
 

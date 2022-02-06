@@ -9,8 +9,9 @@ def gen_uuid() -> str:
     return str(uuid.uuid4())
 
 
-def get_secret(length = 32) -> str:
+def get_secret(length=32) -> str:
     return secrets.token_urlsafe(length)
+
 
 def chunks(items: list[T], n: int) -> list[T]:
     """Yield successive n-sized chunks from lst."""

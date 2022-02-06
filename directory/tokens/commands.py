@@ -18,12 +18,13 @@ def new_token(
 
     with db.get_session() as session:
 
-        token = Token(comment=comment, token=get_secret())
+        token = Token(comment=comment, secret=get_secret())
         token = insert_token(session, token)
 
         typer.echo(
-            "New token:\n"
-            f"\tID: {token.id}\n"
-            f"\tToken: {token.token}\n"
+            f"""
+            New token:
+            \tID: {token.id}
+            \tToken: {token.secret}
+        """
         )
-

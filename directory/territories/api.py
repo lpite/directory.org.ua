@@ -13,6 +13,7 @@ from directory.territories.schemas import (
     GetKOATUUListResponse,
     GetKOATUUGListParams,
 )
+from directory.tokens import utils as tokens
 
 router = APIRouter(
     prefix="/api",
@@ -21,6 +22,7 @@ router = APIRouter(
         422: {"description": "Декілька або один параметр запиту містить помилку"},
         500: {"description": "Невідома помилка серверу"},
     },
+    dependencies=[Depends(tokens.check_header_token)],
 )
 
 _KATOTTG_TAG = "КАТОТТГ"

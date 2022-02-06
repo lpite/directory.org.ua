@@ -17,6 +17,6 @@ class Token(Base):
 
     id = Column(UUID, primary_key=True, default=gen_uuid)
     # I know it's not secure :eye-rolling
-    token = Column(String, primary_key=False, index=True, unique=True)
+    secret = Column(String, primary_key=False, index=True, unique=True)
     comment = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)

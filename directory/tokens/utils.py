@@ -15,7 +15,7 @@ def check_header_token(
     session: Session = Depends(db_dependency),
 ) -> None:
     if not secret:
-        logging.warning("No token in header", extra={'secret': secret})
+        logging.warning("No token in header", extra={"secret": secret})
 
     token = db.get_token(session=session, secret=secret)
     if token is None:

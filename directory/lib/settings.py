@@ -3,6 +3,7 @@ from pydantic import BaseSettings, validator
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    SERVER_ORIGIN: str = "https://directory.org.ua"
 
     @validator("DATABASE_URL", pre=True)
     def normalize(cls, database_url: str) -> str:
@@ -11,4 +12,4 @@ class Settings(BaseSettings):
         return database_url
 
 
-SETTINGS = Settings()
+settings = Settings()

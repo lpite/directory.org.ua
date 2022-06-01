@@ -93,6 +93,13 @@ class GetKATOTTGListResponse(ListResponseBase):
         }
 
 
+class GetKATOTTGListLegacyResponse(BaseModel):
+    count: int
+    next: str | None
+    previous: str | None
+    results: list[KATOTTG]
+
+
 class GetKOATUUListResponse(ListResponseBase):
     results: list[KOATUU]
 

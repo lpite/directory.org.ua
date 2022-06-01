@@ -4,7 +4,7 @@ from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from directory.lib.settings import SETTINGS
+from directory.lib.settings import settings
 
 config = context.config
 
@@ -34,7 +34,7 @@ def run_migrations_offline():
 
     """
     context.configure(
-        url=SETTINGS.DATABASE_URL,
+        url=settings.DATABASE_URL,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},

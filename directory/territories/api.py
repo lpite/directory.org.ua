@@ -1,10 +1,11 @@
 from http import HTTPStatus
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from directory.lib.db import db_dependency
 from directory.lib.router import APIRouter
+from directory.lib.settings import settings
 from directory.territories import db
 from directory.territories.schemas import (
     GetKATOTTGListResponse,
@@ -12,6 +13,7 @@ from directory.territories.schemas import (
     GetKATOTTGListParams,
     GetKOATUUListResponse,
     GetKOATUUGListParams,
+    GetKATOTTGListLegacyResponse,
 )
 from directory.tokens import utils as tokens
 
@@ -22,7 +24,6 @@ router = APIRouter(
         422: {"description": "Декілька або один параметр запиту містить помилку"},
         500: {"description": "Невідома помилка серверу"},
     },
-    dependencies=[Depends(tokens.check_header_token)],
 )
 
 _KATOTTG_TAG = "КАТОТТГ"
@@ -140,15 +141,30 @@ def get_koatuu_detail(code: str, session: Session = Depends(db_dependency)):
     summary="Список КАТОТТГ",
     deprecated=True,
     tags=[_KATOTTG_TAG],
-    response_model=GetKATOTTGListResponse,
+    response_model=GetKATOTTGListLegacyResponse,
 )
 def get_territory_list(
+    request: Request,
     # input parameters
     params: GetKATOTTGListParams = Depends(GetKATOTTGListParams),
     # dependencies
     session: Session = Depends(db_dependency),
-) -> GetKATOTTGListResponse:
-    return get_katottg_list(params=params, session=session)
+) -> GetKATOTTGListLegacyResponse:
+
+    page = get_katottg_list(params=params, session=session)
+
+    page_size = len(page.results)
+    count = page_size + 1 if page.has_next else page_size
+    base_url = f"{settings.SERVER_ORIGIN}/api/territories"
+    next_page = f"{base_url}?page={page.page + 1}" if page.has_next else None
+    previous_page = f"{base_url}?page={page.page - 1}" if page.has_previous else None
+
+    return GetKATOTTGListLegacyResponse(
+        results=page.results,
+        count=count,
+        next=next_page,
+        previous=previous_page,
+    )
 
 
 @router.get(

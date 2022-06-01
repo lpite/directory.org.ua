@@ -9,6 +9,7 @@ x-base: &base
     dockerfile: docker/backend.dockerfile
   environment:
     - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    - SERVER_ORIGIN=http://localhost:8065
   volumes:
     - .:/app
   depends_on:
@@ -26,9 +27,9 @@ services:
 
   web:
     <<: *base
-    command: uvicorn app:app --host 0.0.0.0 --reload
+    command: uvicorn app:app --host 0.0.0.0 --port 8065 --reload
     ports:
-      - "8000:8000"
+      - "8065:8065"
 
   commands:
     <<: *base

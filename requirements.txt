@@ -9,3 +9,5 @@ SQLAlchemy
 translitua
 typer
 uvicorn[standard]
+sentry-sdk
+pip-tools

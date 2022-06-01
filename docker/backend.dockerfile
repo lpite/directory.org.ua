@@ -2,9 +2,9 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /code
+WORKDIR /app
 
-COPY requirements.txt /code/
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-COPY . /code/
+COPY . /app/

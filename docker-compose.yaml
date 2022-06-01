@@ -10,7 +10,7 @@ x-base: &base
   environment:
     - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
   volumes:
-    - .:/code
+    - .:/app
   depends_on:
     - db
 
@@ -43,3 +43,10 @@ services:
     <<: *base
     entrypoint: black
     command: directory
+
+  pip-comile:
+    <<: *base
+    environment:
+      PIP_TOOLS_CACHE_DIR: /app/.piptools_cache
+    entrypoint: pip-compile
+#    command: requirements/base.in -o requirements/base.txt

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, Query, Response
+from fastapi import APIRouter, Depends, Request, Query, Response, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
@@ -34,7 +34,7 @@ def details(request: Request, code: str, session: Session = Depends(db_dependenc
     code = code.upper()
     territory = db.get_katottg(session, code=code)
     if not territory:
-        raise 404
+        raise HTTPException(status_code=404, detail="Territory not found")
 
     children = db.get_katottg_children(session, code=code)
     parent = territory.parent

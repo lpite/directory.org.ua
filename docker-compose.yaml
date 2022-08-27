@@ -1,21 +1,25 @@
 version: "3"
 
 
-x-base: &base
-  user: "1000:1000"
-  platform: linux/amd64
-  build:
-    context: .
-    dockerfile: docker/backend.dockerfile
-  environment:
-    - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
-    - SERVER_ORIGIN=http://localhost:8065
-  volumes:
-    - .:/app
-  depends_on:
-    - db
-
 services:
+
+  _base: &base
+    user: "1000:1000"
+    build:
+      context: .
+      dockerfile: docker/backend.dockerfile
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+      - SERVER_ORIGIN=http://localhost:8065
+      - PIP_TOOLS_CACHE_DIR=/app/.piptools_cache
+    volumes:
+      - .:/app
+
+  # base with dependencies
+  _python: &python
+    <<: *base
+    depends_on: ["db"]
+
   db:
     image: postgres
     environment:
@@ -26,28 +30,7 @@ services:
       - "5432:5432"
 
   web:
-    <<: *base
+    <<: *python
     command: uvicorn app:app --host 0.0.0.0 --port 8065 --reload
     ports:
       - "8065:8065"
-
-  commands:
-    <<: *base
-    entrypoint: python -m directory.commands
-
-  alembic:
-    <<: *base
-    entrypoint: alembic
-    command: upgrade heads
-
-  black:
-    <<: *base
-    entrypoint: black
-    command: directory
-
-  pip-comile:
-    <<: *base
-    environment:
-      PIP_TOOLS_CACHE_DIR: /app/.piptools_cache
-    entrypoint: pip-compile
-#    command: requirements/base.in -o requirements/base.txt

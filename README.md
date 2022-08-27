@@ -1,21 +1,29 @@
 # directory.org.ua
 
-
+# Start app
+```shell
+just start
+```
 
 # Migrations
 Autogenerate migration
 ```shell
-docker compose run --rm alembic revision --autogenerate -m "Init tables"
+just alembic-autogenerate "Init tables"
 ```
 
 # Load data
 ```shell
-docker compose run --rm commands territories load all
+just commands territories load all
 ```
 
 # Update dependencies
 ```shell
-docker compose run --rm pip-compile
+just pip-compile
+```
+
+# Format code
+```shell
+just black
 ```
 
 # Update KATOTTG on dokku host

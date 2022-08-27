@@ -1,10 +1,10 @@
 PYTHON_COMPOSE_RUN := "docker-compose run --rm _python"
 BASE_COMPOSE_RUN := "docker-compose run --rm _base"
 
-start:
+start: alembic-upgrade
   docker-compose up web
 
-command *ARGS:
+commands *ARGS:
   {{PYTHON_COMPOSE_RUN}} python -m directory.commands {{ARGS}}
 
 alembic *ARGS:

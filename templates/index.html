@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block content %}
-  <h2 class="fw-bold">Україна 🇺🇦</h2>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="fw-bold">Україна 🇺🇦</h2>
+    <div class="text-muted">версія від {{ date_updated.strftime('%d.%m.%Y') }}</div>
+  </div>
+
   <div class="list-group mt-4">
     {% for territory in territories %}
       <a class="list-group-item" href="{{ url_for('territory', code=territory.code) }}">{{ territory.name }}</a>

@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends, Request, Query, Response, HTTPException
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
 
 from directory.lib.db import db_dependency
-from directory.territories import db
+from directory.territories import db, constants
 
 router = APIRouter(include_in_schema=False)
 
@@ -14,7 +13,11 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/", name="territories")
 def index(request: Request, session: Session = Depends(db_dependency)):
     territories = db.get_katottg_roots(session)
-    context = {"request": request, "territories": territories}
+    context = {
+        "request": request,
+        "territories": territories,
+        "date_updated": constants.KATOTTG_LAST_DATE,
+    }
     return templates.TemplateResponse("index.html", context)
 
 
@@ -46,8 +49,3 @@ def details(request: Request, code: str, session: Session = Depends(db_dependenc
     }
 
     return templates.TemplateResponse("details.html", context)
-
-
-@router.get("/ads.txt", response_class=PlainTextResponse)
-def ads():
-    return "google.com, pub-4422566096376436, DIRECT, f08c47fec0942fa0"

@@ -15,7 +15,6 @@ from directory.territories.schemas import (
     GetKOATUUGListParams,
     GetKATOTTGListLegacyResponse,
 )
-from directory.tokens import utils as tokens
 
 router = APIRouter(
     prefix="/api",

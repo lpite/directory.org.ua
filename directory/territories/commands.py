@@ -7,6 +7,7 @@ import openpyxl
 from directory import territories
 from directory.lib import db
 from directory.lib.utils import chunks
+from directory.territories.constants import KATOTTG_LAST_DATE_STR
 from directory.territories.enums import KATOTTGCategory, KOATUUCategory
 from directory.territories.models import KATOTTG, KOATUU
 from translitua import translit, UkrainianKMU
@@ -17,7 +18,7 @@ _load_app = typer.Typer()
 
 app.add_typer(_load_app, name="load")
 
-KATOTTG_FILENAME_DEFAULT = "data/2022.07.25.xlsx"
+KATOTTG_FILENAME_DEFAULT = f"data/{KATOTTG_LAST_DATE_STR}.xlsx"
 KOATUU_FILENAME_DEFAULT = "data/koatuu_transition.xlsx"
 
 

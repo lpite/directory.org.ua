@@ -1,0 +1,13 @@
+alembic
+black
+fastapi
+Jinja2
+openpyxl
+psycopg2-binary
+pydantic
+SQLAlchemy
+translitua
+typer
+uvicorn[standard]
+sentry-sdk
+pip-tools

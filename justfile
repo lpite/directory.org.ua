@@ -4,6 +4,9 @@ BASE_COMPOSE_RUN := "docker-compose run --rm _base"
 start: alembic-upgrade
   docker-compose up web
 
+shell:
+  {{BASE_COMPOSE_RUN}} bash
+
 commands *ARGS:
   {{PYTHON_COMPOSE_RUN}} python -m directory.commands {{ARGS}}
 
@@ -20,4 +23,4 @@ black:
   {{BASE_COMPOSE_RUN}} black .
 
 pip-compile *ARGS:
-  {{PYTHON_COMPOSE_RUN}} pip-copmile {{ARGS}}
+  {{PYTHON_COMPOSE_RUN}} pip-compile {{ARGS}}

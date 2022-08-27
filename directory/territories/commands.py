@@ -17,7 +17,7 @@ _load_app = typer.Typer()
 
 app.add_typer(_load_app, name="load")
 
-KATOTTG_FILENAME_DEFAULT = "data/2021.12.23.xlsx"
+KATOTTG_FILENAME_DEFAULT = "data/2022.07.25.xlsx"
 KOATUU_FILENAME_DEFAULT = "data/koatuu_transition.xlsx"
 
 

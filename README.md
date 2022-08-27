@@ -17,3 +17,8 @@ docker compose run --rm commands territories load all
 ```shell
 docker compose run --rm pip-compile
 ```
+
+# Update KATOTTG on dokku host
+```shell
+dokku run directory.org.ua python -m directory.commands territories load katottg
+```
